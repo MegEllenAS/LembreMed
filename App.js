@@ -4,7 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
-import CadastroScreen from './screens/CadastroScreen'; 
+import CadastroScreen from './screens/CadastroScreen';
+import TelaPrincipalScreen from './screens/TelaPrincipalScreen';
 import AdicionarRemedioScreen from './screens/AdicionarRemedioScreen';
 
 const Stack = createNativeStackNavigator();
@@ -29,10 +30,16 @@ export default function App() {
           options={{ title: 'Cadastrar' }}
         />
         <Stack.Screen
-         name="AdicionarRemedio"
-         component={AdicionarRemedioScreen}
-        options={{ title: 'Novo Remédio' }}
-/>
+          name="AdicionarRemedio"
+          component={AdicionarRemedioScreen}
+          options={{ title: 'Novo Remédio' }}
+        />
+
+        <Stack.Screen
+          name="TelaPrincipal"
+          component={TelaPrincipalScreen}
+          options={{ title: 'Tela Principal' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -14,10 +14,6 @@ export default function HomeScreen({ navigation }) {
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cadastro')}>
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity style={[styles.button, styles.buttonOutline]}>
-        <Text style={[styles.buttonText, styles.outlineText]}>Usar sem login</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 }

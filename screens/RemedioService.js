@@ -16,6 +16,9 @@ class RemedioService {
   limparTudo() {
     this.remedios = [];
   }
+  removerRemedio(nome) {
+    this.remedios = this.remedios.filter(item => item.nome !== nome);
+  }
 }
 
 const instancia = new RemedioService();
