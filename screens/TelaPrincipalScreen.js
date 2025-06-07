@@ -1,15 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import RemedioService from './RemedioService';
+import styles from './TelaPrincipalScreen.styles';
 
 export default function TelaPrincipalScreen({ navigation }) {
   const [remedios, setRemedios] = useState([]);
-  const isFocused = useIsFocused(); // Atualiza quando volta pra essa tela
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     atualizarLista();
   }, [isFocused]);
+
+ 
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert('Sair', 'Deseja voltar para o início?', [
+              { text: 'Cancelar', style: 'cancel' },
+              {
+                text: 'Sim',
+                onPress: () => navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Home' }],
+                }),
+              },
+            ]);
+          }}
+          style={{ marginRight: 15 }}
+        >
+          <Text style={{ color: 'red', fontWeight: 'bold' }}>Sair</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
 
   const atualizarLista = () => {
     const lista = RemedioService.listarRemedios();
@@ -54,41 +80,3 @@ export default function TelaPrincipalScreen({ navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20 },
-  titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
-  card: {
-    backgroundColor: '#d6f5e9',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  cardInfo: {
-    flex: 1,
-  },
-  nome: { fontSize: 18, fontWeight: 'bold' },
-  horario: { fontSize: 16 },
-  botaoRemover: {
-    backgroundColor: '#e53935',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 6,
-  },
-  removerTexto: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  vazio: { textAlign: 'center', marginTop: 50, color: '#888' },
-  botao: {
-    backgroundColor: '#4CAF50',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  botaoTexto: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
-});

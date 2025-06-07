@@ -7,6 +7,7 @@ import LoginScreen from './screens/LoginScreen';
 import CadastroScreen from './screens/CadastroScreen';
 import TelaPrincipalScreen from './screens/TelaPrincipalScreen';
 import AdicionarRemedioScreen from './screens/AdicionarRemedioScreen';
+import BoasVindasScreen from './screens/BoasVindasScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,11 @@ export default function App() {
           name="TelaPrincipal"
           component={TelaPrincipalScreen}
           options={{ title: 'Tela Principal' }}
+        />
+         <Stack.Screen
+          name="BoasVindas"
+          component={BoasVindasScreen}
+          options={{ title: 'Boas Vindas' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

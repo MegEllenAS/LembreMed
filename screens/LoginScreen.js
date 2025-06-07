@@ -12,8 +12,8 @@ export default function LoginScreen({ navigation }) {
       alert(`Email e Senha Obrigatórios`);
       return;
     }
-
-    navigation.navigate('TelaPrincipal');
+    navigation.navigate('BoasVindas');
+    //  navigation.navigate('BoasVindas', { nomeUsuario: nome });
   };
 
   return (

@@ -9,8 +9,8 @@ export default function CadastroScreen({ navigation }) {
 
   const cadastrar = () => {
     if (nome.trim() && email.includes('@') && senha.length >= 6) {
-      alert(`Bem-vindo, ${nome}!`);
-      navigation.navigate('Login');
+      alert(`Cadastrado com sucesso!, ${nome}!`);
+      navigation.navigate('BoasVindas', { nomeUsuario: nome });
     } else {
       alert('Preencha todos os campos corretamente.');
     }
