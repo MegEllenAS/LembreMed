@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
   const handleLogin = () => {
     // Aqui você pode validar ou navegar
-    alert(`Email: ${email}\nSenha: ${senha}`);
+    
+    if(!email || !senha){
+      alert(`Email e Senha Obrigatórios`);
+      return;
+    }
+    navigation.navigate('BoasVindas');
+    //  navigation.navigate('BoasVindas', { nomeUsuario: nome });
   };
 
   return (
