@@ -47,7 +47,6 @@ Utilize um emulador ou o aplicativo Expo Go para testar no celular
 O projeto foi feito em grupo com cinco pessoas  
 A maior parte do desenvolvimento do aplicativo incluindo as telas e a lógica principal foi feita por mim Megue Ellen  
 Outros colegas contribuíram com o banner apresentação identidade visual e apoio em funcionalidades futuras  
-O colega responsável pela parte de backend não chegou a enviar sua parte até o momento
 
 ## Status do Projeto
 
