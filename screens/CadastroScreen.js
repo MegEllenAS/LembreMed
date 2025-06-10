@@ -1,18 +1,32 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from './CadastroScreen.styles';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 export default function CadastroScreen({ navigation }) {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const cadastrar = () => {
-    if (nome.trim() && email.includes('@') && senha.length >= 6) {
-      alert(`Cadastrado com sucesso!, ${nome}!`);
-      navigation.navigate('BoasVindas', { nomeUsuario: nome });
-    } else {
+  const cadastrar = async () => {
+    if (!(nome.trim() && email.includes('@') && senha.length >= 6)) {
       alert('Preencha todos os campos corretamente.');
+      return;
+    }
+    try {
+      await createUserWithEmailAndPassword(auth, email, senha);
+      alert(`Cadastrado com sucesso, ${nome}!`);
+      navigation.navigate('BoasVindas', { nomeUsuario: nome });
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        alert('E-mail já cadastrado.');
+      } else if (error.code === 'auth/invalid-email') {
+        alert('E-mail inválido.');
+      } else {
+        alert('Erro ao cadastrar: ' + error.message);
+      }
     }
   };
 
