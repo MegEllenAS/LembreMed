@@ -1,19 +1,28 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const handleLogin = () => {
-    // Aqui você pode validar ou navegar
-    
-    if(!email || !senha){
-      alert(`Email e Senha Obrigatórios`);
+  const handleLogin = async () => {
+    if (!email || !senha) {
+      alert('Email e Senha Obrigatórios');
       return;
     }
-    navigation.navigate('BoasVindas');
-    //  navigation.navigate('BoasVindas', { nomeUsuario: nome });
+    try {
+      await signInWithEmailAndPassword(auth, email, senha);
+      navigation.navigate('BoasVindas');
+    } catch (error) {
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        alert('Usuário ou senha inválidos.');
+      } else {
+        alert('Erro ao fazer login: ' + error.message);
+      }
+    }
   };
 
   return (
